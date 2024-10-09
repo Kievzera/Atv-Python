@@ -8,31 +8,31 @@ import os
 ARQUIVO_PRODUTOS = "produtos.json"
 ARQUIVO_VENDAS = "vendas.csv"
 
-# Carregar produtos de um arquivo JSON
+# Carregar produtos de um JSON
 def carregar_produtos():
     if os.path.exists(ARQUIVO_PRODUTOS):
         with open(ARQUIVO_PRODUTOS, "r") as file:
             return json.load(file)
     else:
-        # Dados iniciais
+        # produtos iniciais
         return {
             "001": {"nome": "Camisa", "quantidade": 10, "preco": 50.00},
             "002": {"nome": "Calça", "quantidade": 15, "preco": 80.00},
             "003": {"nome": "Tênis", "quantidade": 5, "preco": 120.00},
         }
 
-# Salvar produtos em um arquivo JSON
+# Salvar produtos em um arquivo.JSON
 def salvar_produtos():
     with open(ARQUIVO_PRODUTOS, "w") as file:
         json.dump(produtos, file)
 
-# Carregar vendas de um arquivo CSV
+# Carregar vendas de um arquivo.CSV
 def carregar_vendas():
     if os.path.exists(ARQUIVO_VENDAS):
         return pd.read_csv(ARQUIVO_VENDAS, sep=";", encoding="utf-8").to_dict(orient="records")
     return []
 
-# Salvar vendas em um arquivo CSV
+# Salvar vendas em um arquivo.CSV
 def salvar_vendas():
     df_vendas = pd.DataFrame(vendas)
     df_vendas.to_csv(ARQUIVO_VENDAS, index=False, sep=";", encoding="utf-8")
@@ -54,7 +54,7 @@ def validar_float(mensagem):
         except ValueError:
             print("Entrada inválida. Digite um número decimal.")
 
-# Cadastrar produto
+# Aqui cadastra o produto
 def cadastrar_produto():
     codigo = input("Digite o código do produto: ")
     nome = input("Digite o nome do produto: ")
@@ -68,7 +68,7 @@ def cadastrar_produto():
     else:
         print("Código já cadastrado!")
 
-# Registrar venda
+# registrar a venda
 def registrar_venda():
     codigo = input("Digite o código do produto: ")
     if codigo in produtos:
@@ -90,7 +90,7 @@ def registrar_venda():
     else:
         print("Produto não encontrado.")
 
-# Gerar relatório de vendas
+# Gera o relatório de vendas
 def gerar_relatorio_vendas():
     if vendas:
         df_vendas = pd.DataFrame(vendas)
@@ -99,7 +99,7 @@ def gerar_relatorio_vendas():
     else:
         print("Nenhuma venda registrada.")
 
-# Gerar relatório de estoque
+# Gera o de estoque
 def gerar_relatorio_estoque():
     with open("relatorio_estoque.txt", "w") as file:
         file.write("Código\tNome\tQuantidade em Estoque\n")
@@ -137,6 +137,6 @@ def menu():
 produtos = carregar_produtos()
 vendas = carregar_vendas()
 
-# Iniciar o menu
+# Inicia o menu
 if __name__ == "__main__":
     menu()
